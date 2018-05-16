@@ -1,7 +1,7 @@
 #InfoTrack Development Project: SEO Analysis
 
 
-This is a basic isomorphic boilerplate app, built with react, node/express, ES6, webpack etc.
+This is a basic isomorphic app, built with react, node/express, ES6, webpack etc.
 
 ### install
 
