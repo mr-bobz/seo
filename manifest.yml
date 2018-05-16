@@ -1,3 +1,10 @@
----
 applications:
-- memory: 256M
+- path: .
+  memory: 256M
+  instances: 1
+  domain: au-syd.mybluemix.net
+  name: seo
+  host: seo
+  disk_quota: 1024M
+  services:
+  - soa-cloudantNoSQLDB
