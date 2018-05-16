@@ -1,0 +1,120 @@
+/*
+    Main and only CSS file!
+    @author: Bobby Joseph <bobbyj79@gmail.com>
+*/
+
+
+#root{
+    height: 100%;
+    margin-bottom: 35px;
+}
+
+.seo{
+    padding: 10px;
+    margin: 20px;
+}
+
+.seo .center{
+    display: flex;
+    align-items:center;
+    justify-content: center;
+}
+
+.seo .tabCenter{
+    display: flex;
+    justify-content: center;
+}
+
+.seo .right{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.seo .header{
+    margin-top: 10px;
+}
+.seo .header .infotrack-logo{
+    margin: 10px;
+}
+
+.seo .input{
+    margin-top: 10px;
+    flex-direction: column;
+}
+
+.seo .input .google-logo{
+    margin: 10px;
+    height: 150px;
+}
+
+.seo .header .heading{
+    display: inline;
+    margin: 10px;
+}
+
+.seo .placeholder{
+    margin-top: 50px;
+}
+
+.seo .sameRow{
+    display: flex;
+}
+
+.seo .input .search{
+    height: 40px;
+    margin-right: 10px;
+}
+
+.seo .input .search .bx--search-input{
+    height: auto;
+}
+
+.seo .bx--tabs__nav{
+    display: flex;
+    align-items:center;
+    justify-content: center;
+}
+
+.seo a[target="_blank"]:after {
+    content: "↗";
+}
+
+.seo .footer{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: lightgray;
+    padding: 10px;
+}
+
+.seo .inputs{
+    flex-direction: column;
+}
+
+.seo .inputs > * {
+    margin: 10px;
+}
+
+.seo .results{
+    border: 1px dotted lightgrey;
+    padding: 10px;
+    overflow: auto;
+}
+
+.seo .tab1{
+    display: none;
+}
+
+.seo .nodata{
+    margin-top: 20px;
+    padding-left: 30%;   
+}
+
+.seo .googleURL{
+    color: #006621;
+}
+
+.seo .googleSummary{
+    color: grey;
+}
