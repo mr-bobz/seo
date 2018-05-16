@@ -29,9 +29,7 @@
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "request": "^2.86.0",
-    "request-promise": "^4.2.2"
-  },
-  "devDependencies": {
+    "request-promise": "^4.2.2",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",
@@ -40,11 +38,13 @@
     "css-loader": "^0.28.11",
     "file-loader": "^1.1.11",
     "html-webpack-plugin": "^3.2.0",
-    "nodemon": "^1.17.4",
-    "parallelshell": "^3.0.2",
     "style-loader": "^0.21.0",
     "url-loader": "^1.0.1",
-    "webpack": "^4.8.3",
+    "webpack": "^4.8.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.4",
+    "parallelshell": "^3.0.2",
     "webpack-cli": "^2.1.3"
   }
 }
