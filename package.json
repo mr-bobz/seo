@@ -9,7 +9,7 @@
     "build:client": "webpack --config ./webpack.prod.config.js/",
     "build:watch:client": "webpack --env dev --progress --profile --colors --config ./webpack.config.js/ --watch",
     "build": "npm run build:server && npm run build:client",
-    "start": "cd build && node ./server/index.js",
+    "start": "cd ./build && node ./server/index.js",
     "start:dev": "parallelshell 'npm run build:watch:server' 'npm run build:watch:client && NODE_ENV=development' 'nodemon ./build/server/index.js'",
     "test": "echo \"Error: no test specified\" && exit 1",
     "babel": "babel"
