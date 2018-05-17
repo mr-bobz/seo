@@ -26,6 +26,7 @@ module.exports = {
                 loader: 'url-loader',
                 options: {
                     limit: 25000,
+                    fallback: 'file-loader'
                 }
             },
             {

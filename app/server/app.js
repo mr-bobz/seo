@@ -22,6 +22,15 @@ app.get('/', (req, res) => {
     res.sendFile(indexPath);
 })
 
+/*app.get('*', function (req, res) {
+    var p = req.path.replace(/^\//, '').replace(/\/$/, '');
+    if (p && p.endsWith('.js')) {
+        var options = { headers: { 'content-type': 'application/javascript' } };
+        res.sendFile(path.join(__dirname, '../', p), options);
+    } else
+        res.sendFile(path.join(__dirname, '../', 'index.html'));
+});*/
+
 app.post('/api/scrape', function (req, res) {
     console.log("req.body:", req.body);
     scraper.scrape(req.body.keywords, req.body.url)
