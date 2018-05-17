@@ -8,5 +8,7 @@ applications:
   disk_quota: 1024M
   command: npm start
   buildpack: https://github.com/cloudfoundry/nodejs-buildpack
+  env:
+    OPTIMIZE_MEMORY: true
   services:
   - soa-cloudantNoSQLDB

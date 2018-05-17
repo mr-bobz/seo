@@ -51,7 +51,7 @@
     "parallelshell": "^3.0.2"
   },
   "engines": {
-    "node": ">=8 <9",
-    "npm": ">=6 <7"
+    "node": "8",
+    "npm": "6"
   }
 }
