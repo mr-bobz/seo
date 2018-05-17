@@ -4,7 +4,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     mode: 'production',
-    devtool: 'inline-source-map',
+    devtool: 'source-map',
     entry: ['./app/client/index.js'],
     output: {
         path: path.join(__dirname, 'build'),
@@ -40,6 +40,7 @@ module.exports = {
             template: './app/public/index.html',
             filename: 'index.html',
             inject: 'body',
+            hash: true
         })
     ],
 };
