@@ -107,8 +107,8 @@
 }
 
 .seo .nodata{
-    margin-top: 20px;
-    padding-left: 30%;   
+    margin-top: 20px;  
+    font-style: italic;
 }
 
 .seo .googleURL{
@@ -117,4 +117,13 @@
 
 .seo .googleSummary{
     color: grey;
+}
+
+.seo .fluid-react-row{
+    align-items: baseline;
+    margin: 10px;
+}
+
+.seo .button{
+    margin:10px;
 }

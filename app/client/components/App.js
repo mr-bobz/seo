@@ -4,7 +4,7 @@
 */
 
 import React from 'react';
-
+import { Container, Row, Col } from 'fluid-react';
 import {
     Search,
     Form,
@@ -16,22 +16,25 @@ import {
     StructuredListBody,
     StructuredListRow,
     StructuredListCell,
-    DataTable
+    DataTable,
+    FormLabel,
+    Tooltip
 } from 'carbon-components-react';
+
 
 import ResultTile from './ResultTile';
 import infotrackLogo from '../images/infotrack-logo.png';
 import googleLogo from '../images/google-logo.jpg';
 
-const { TableContainer, Table, TableHead, TableHeader, TableBody, TableRow, 
-        TableCell, TableToolbar, TableToolbarSearch } = DataTable;
+const { TableContainer, Table, TableHead, TableHeader, TableBody, TableRow,
+    TableCell, TableToolbar, TableToolbarSearch } = DataTable;
 
 class App extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            inputKeywords: 'infotrack', //defaults
+            inputKeywords: 'online title search', //defaults
             inputURL: 'infotrack.com', //defaults
             trend: [] //TODO: store and retrieve from NOSQL DB
         };
@@ -134,9 +137,14 @@ class App extends React.Component {
                     summary={element.summary}
                 />)
             }
-        } else 
-            resultTiles = <div className="center nodata" id="nodata">No results found!</div>
-        
+        } else
+            //resultTiles = <div className="center nodata" id="nodata">No results found!</div>
+            resultTiles = <ResultTile
+                key={0 + ""}
+                position={"-"}
+                summary={"No results found!"}
+            />
+
         return (
             <StructuredListWrapper>
                 <StructuredListHead>
@@ -161,6 +169,9 @@ class App extends React.Component {
 
         //passing array directly not working with DataTable?! Copy array!
         const tableData = this.state.trend.slice(); //quick shallow copy
+        let noDataMsg = "";
+        if (tableData.length === 0)
+            noDataMsg = "No data found!";
 
         return (
             <div className="seo">
@@ -185,27 +196,50 @@ class App extends React.Component {
                     >
                         <Form className="input center" onSubmit={this.onSubmit.bind(this)}>
                             <img src={googleLogo} className="google-logo" alt="Google Logo" />
-                            <div className="inputs center">
-                                <Search
-                                    id="url"
-                                    small
-                                    className="search"
-                                    placeHolderText="url to match: eg: infotrack.com"
-                                    value={this.state.inputURL} onChange={this.handleInputChange_url.bind(this)}
-                                />
-                                <Search
-                                    id="keywords"
-                                    small
-                                    className="search"
-                                    placeHolderText="keywords eg: infotrack"
-                                    value={this.state.inputKeywords} onChange={this.handleInputChange_keywords.bind(this)}
-                                />
-                                <Button onClick={this.onSubmit.bind(this)} className="button">
-                                    Analyse
-                                </Button>
-                            </div>
+                            <Container>
+                                <Row>
+                                    <Col xs="12" sm="4" md="4" lg="4" xl="4">
+                                        <FormLabel className="some-class">
+                                            <Tooltip triggerText="URL">
+                                                Full or part URL of your website
+                                        </Tooltip>
+                                        </FormLabel>
+                                    </Col>
+                                    <Col xs="12" sm="8" md="8" lg="8" xl="8">
+                                        <Search
+                                            id="url"
+                                            small
+                                            className="search"
+                                            placeHolderText="url to match: eg: infotrack.com"
+                                            value={this.state.inputURL} onChange={this.handleInputChange_url.bind(this)}
+                                        />
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col xs="12" sm="4" md="4" lg="4" xl="4">
+                                        <FormLabel className="some-class">
+                                            <Tooltip triggerText="Keywords">
+                                                Enter the keywords you want to search in Google, eg: online title search
+                                        </Tooltip>
+                                        </FormLabel>
+                                    </Col>
+                                    <Col xs="12" sm="8" md="8" lg="8" xl="8">
+                                        <Search
+                                            id="keywords"
+                                            small
+                                            className="search"
+                                            placeHolderText="keywords eg: infotrack"
+                                            value={this.state.inputKeywords} onChange={this.handleInputChange_keywords.bind(this)}
+                                        />
+                                    </Col>
+                                </Row>
+                            </Container>
+                            <Button onClick={this.onSubmit.bind(this)} className="button center">
+                                Search
+                            </Button>
                         </Form>
                         <div className="results">
+                            <div className="center">Total Hits: {this.state.results ? this.state.results.length : 0}</div>
                             {this.generateTiles()}
                         </div>
                     </div>
@@ -251,9 +285,10 @@ class App extends React.Component {
                                     </TableContainer>
                                 )}
                             />
+                            <div className="center nodata">{noDataMsg}</div>
                         </div>
                     </div>
-                </main>    
+                </main>
 
                 <footer className="footer right">
                     <a href="http://www.linkedin.com/in/bobbyjoseph" target="_blank">&copy;Bobby</a>

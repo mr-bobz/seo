@@ -6,5 +6,7 @@ applications:
   name: soa
   host: soa
   disk_quota: 1024M
+  command: npm start
+  buildpack: https://github.com/cloudfoundry/nodejs-buildpack
   services:
   - soa-cloudantNoSQLDB
