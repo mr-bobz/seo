@@ -28,11 +28,7 @@ module.exports = {
             },
             {
                 test: /\.(jp?g|png|svg|gif)$/,
-                loader: 'url-loader',
-                options: {
-                    limit: 25000,
-                    fallback: 'file-loader'
-                }
+                loader: 'file-loader'
             },
             {
                 test: /\.css$/,
