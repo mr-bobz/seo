@@ -22,7 +22,7 @@ import {
 } from 'carbon-components-react';
 
 
-import ResultTile from './ResultTile';
+import ResultTile from './ResultTile.jsx';
 import infotrackLogo from '../images/infotrack-logo.png';
 import googleLogo from '../images/google-logo.jpg';
 
@@ -36,7 +36,8 @@ class App extends React.Component {
         this.state = {
             inputKeywords: 'online title search', //defaults
             inputURL: 'infotrack.com', //defaults
-            trend: [] //TODO: store and retrieve from NOSQL DB
+            trend: [], //TODO: store and retrieve from NOSQL DB,
+            tabSelection: {tab0: true, tab1: false}
         };
 
         this.tableHeaders = [
@@ -61,11 +62,13 @@ class App extends React.Component {
 
     onTabChange(tab) {
         console.log("tab onClick called..:", tab);
+        let tabSelection = this.state.tabSelection;        
         for (let i = 0; i < this.tabCount; i++) {
-            document.getElementById('tab' + i).style.display = 'none';
+            tabSelection[`tab${i}`] = false; //deselect all tabs
         }
-        document.getElementById('tab' + tab.index).style.display = 'block';
-        //this.setState(tab);
+        tabSelection[tab.name] = true; //select active tab
+        console.log("tabSelection:", tabSelection);
+        this.setState({tabSelection: tabSelection});
     }
 
     onSubmit(event) {
@@ -182,14 +185,14 @@ class App extends React.Component {
 
                 <nav role="navigation">
                     <ContentSwitcher onChange={this.onTabChange.bind(this)} className="tabCenter">
-                        <Switch name="tab1" text="Analyse" />
-                        <Switch name="tab2" text="Trends" />
+                        <Switch name="tab0" text="Analyse" />
+                        <Switch name="tab1" text="Trends" />
                     </ContentSwitcher>
                 </nav>
 
                 <main>
                     <div
-                        className="tab0"
+                        className={`tab0 ${this.state.tabSelection["tab0"]?"selectTab":"deselectTab"}`}
                         label="Analyse"
                         id='tab0'
                         role="tab"
@@ -244,7 +247,7 @@ class App extends React.Component {
                         </div>
                     </div>
                     <div
-                        className="tab1"
+                        className={`tab1 ${this.state.tabSelection["tab1"]?"selectTab":"deselectTab"}`}
                         label="Trends"
                         id='tab1'
                         role="tab"

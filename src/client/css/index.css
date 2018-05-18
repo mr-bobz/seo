@@ -127,3 +127,11 @@
 .seo .button{
     margin:10px;
 }
+
+.seo .selectTab{
+    display: block;
+}
+
+.seo .deselectTab{
+    display: none;
+}

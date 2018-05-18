@@ -1,28 +1,33 @@
 const path = require('path');
 const webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+const paths = {
+    DIST: path.resolve(__dirname, 'dist'),
+    SRC: path.resolve(__dirname, 'src')
+};
 
 module.exports = {
     mode: 'production',
     devtool: 'source-map',
-    entry: ['./app/client/index.js'],
+    entry: path.join(paths.SRC, 'client/index.jsx'),
     output: {
-        path: path.join(__dirname, 'build'),
-        filename: 'bundle.js',
+        path: paths.DIST,
+        filename: 'bundle.js'
     },
     module: {
         rules: [
             {
-                test: /.js$/,
+                test: /\.(js|jsx)$/i,
                 loader: 'babel-loader',
-                include: path.join(__dirname, 'app/client'),
+                include: path.join(paths.SRC, 'client'),
                 exclude: /node_modules/,
                 query: {
                     presets: ['es2015', 'react']
                 }
             },
             {
-                test: /\.(jpg|png|svg)$/,
+                test: /\.(jp?g|png|svg|gif)$/,
                 loader: 'url-loader',
                 options: {
                     limit: 25000,
@@ -37,7 +42,7 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: './app/public/index.html',
+            template: path.join(paths.SRC, 'public/index.html'),
             filename: 'index.html',
             inject: 'body',
             hash: true

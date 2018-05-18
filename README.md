@@ -5,6 +5,8 @@ This is a basic isomorphic app, built with react, node/express, ES6, webpack etc
 
 ### install
 
+* `git clone https://github.com/mr-bobz/seo` - clone locally or download as zip from the site
+* `cd seo` - change to local directory before calling npm install in next step
 * `npm i` - install dependencies
 
 ### run in dev
