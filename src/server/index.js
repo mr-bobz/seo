@@ -6,7 +6,7 @@
 import app from './app';
 
 // Determine port to listen on
-const port = process.env.PORT || process.env.VCAP_APP_PORT || 9000;
+const port = process.env.PORT || 9000;
 
 app.listen(port);
 console.log(`Listening at http://localhost:${port}`);

@@ -1,4 +1,4 @@
-#InfoTrack Development Project: SEO Analysis
+#Sample Project: SEO Analysis
 
 
 This is a basic isomorphic app, built with react, node/express, ES6, webpack etc.

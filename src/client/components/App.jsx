@@ -23,8 +23,8 @@ import {
 
 
 import ResultTile from './ResultTile.jsx';
-import infotrackLogo from '../images/infotrack-logo.png';
-import googleLogo from '../images/google-logo.jpg';
+import appLogo from '../images/app-logo.png';
+//import googleLogo from '../images/google-logo.jpg';
 
 const { TableContainer, Table, TableHead, TableHeader, TableBody, TableRow,
     TableCell, TableToolbar, TableToolbarSearch } = DataTable;
@@ -179,7 +179,7 @@ class App extends React.Component {
         return (
             <div className="seo">
                 <header className="header center">
-                    <img src={infotrackLogo} className="infotrack-logo" alt="InfoTrack Logo" />
+                    <img src={appLogo} className="app-logo" alt="App Logo" />
                     <h1 className="heading">SEO Analyser</h1>
                 </header>
 
@@ -198,7 +198,7 @@ class App extends React.Component {
                         role="tab"
                     >
                         <Form className="input center" onSubmit={this.onSubmit.bind(this)}>
-                            <img src={googleLogo} className="google-logo" alt="Google Logo" />
+                            {/*<img src={googleLogo} className="google-logo" alt="Google Logo" />*/}
                             <Container>
                                 <Row>
                                     <Col xs="12" sm="4" md="4" lg="4" xl="4">
@@ -231,7 +231,7 @@ class App extends React.Component {
                                             id="keywords"
                                             small
                                             className="search"
-                                            placeHolderText="keywords eg: infotrack"
+                                            placeHolderText="keywords eg: title search"
                                             value={this.state.inputKeywords} onChange={this.handleInputChange_keywords.bind(this)}
                                         />
                                     </Col>

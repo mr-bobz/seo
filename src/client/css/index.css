@@ -33,8 +33,10 @@
 .seo .header{
     margin-top: 10px;
 }
-.seo .header .infotrack-logo{
+
+.seo .header .app-logo{
     margin: 10px;
+    height: 100px;
 }
 
 .seo .input{
