@@ -5,6 +5,7 @@
 
 import React from 'react';
 import { Container, Row, Col } from 'fluid-react';
+//http://react.carbondesignsystem.com/
 import {
     Search,
     Form,
@@ -18,11 +19,13 @@ import {
     StructuredListCell,
     DataTable,
     FormLabel,
-    Tooltip
+    Tooltip, 
+    Loading
 } from 'carbon-components-react';
 
 
 import ResultTile from './ResultTile.jsx';
+import SearchAPI from '../SearchAPI.js';
 import appLogo from '../images/app-logo.png';
 //import googleLogo from '../images/google-logo.jpg';
 
@@ -37,7 +40,8 @@ class App extends React.Component {
             inputKeywords: 'online title search', //defaults
             inputURL: 'infotrack.com', //defaults
             trend: [], //TODO: store and retrieve from NOSQL DB,
-            tabSelection: {tab0: true, tab1: false}
+            tabSelection: {tab0: true, tab1: false},
+            loading: false
         };
 
         this.tableHeaders = [
@@ -77,53 +81,46 @@ class App extends React.Component {
         console.debug("input:", this.state.inputKeywords);
         console.debug("url:", this.state.inputURL);
 
+        //show progress indicator    
+        this.setState({
+            loading: true,
+            results: []
+        });
+
         if (document.getElementById('nodata'))
             document.getElementById('nodata').innerHTML = "Searching...";
 
-        //fetch config    
-        var options = {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                keywords: this.state.inputKeywords,
-                url: this.state.inputURL
-            })
-        };
-
-        //call NodeJS API for web scraping    
-        fetch('/api/scrape', options)
+        SearchAPI.search(this.state.inputKeywords, this.state.inputURL)    
             .then(resp => resp.json())
-            .then(data => {
-                // code for handling the data from the API
-                console.log("fetch succesful, data:", data);
-                let trend = this.state.trend;
-                let positions = "";
-                if (data && data.length > 0) {
-                    for (let i = 0; i < data.length; i++) {
-                        if (i > 0) {
-                            positions += ", " + data[i].position;
-                        } else positions += data[i].position;
+                .then(data => {
+                    // code for handling the data from the API
+                    console.log("fetch succesful, data:", data);
+                    let trend = this.state.trend;
+                    let positions = "";
+                    if (data && data.length > 0) {
+                        for (let i = 0; i < data.length; i++) {
+                            if (i > 0) {
+                                positions += ", " + data[i].position;
+                            } else positions += data[i].position;
+                        }
                     }
-                }
-                trend.push({
-                    id: Date.now() + "", //rowId for table
-                    date: new Date().toLocaleString(),
-                    positions: positions,
-                    url: this.state.inputURL,
-                    keywords: this.state.inputKeywords
-                })
-                //console.debug("trend:",trend);
-                this.setState({
-                    results: data,
-                    trend: trend
-                })
-            }).catch(function (err) {
-                // if the server returns any errors
-                console.error(err);
-            });
+                    trend.push({
+                        id: Date.now() + "", //rowId for table
+                        date: new Date().toLocaleString(),
+                        positions: positions,
+                        url: this.state.inputURL,
+                        keywords: this.state.inputKeywords
+                    })
+                    //console.debug("trend:",trend);
+                    this.setState({
+                        results: data,
+                        trend: trend,
+                        loading: false
+                    })
+                }).catch(function (err) {
+                    // if the server returns any errors
+                    console.error(err);
+                });
     }
 
     generateTiles() {
@@ -191,6 +188,7 @@ class App extends React.Component {
                 </nav>
 
                 <main>
+                    <Loading className="loading" active={this.state.loading}/>
                     <div
                         className={`tab0 ${this.state.tabSelection["tab0"]?"selectTab":"deselectTab"}`}
                         label="Analyse"
