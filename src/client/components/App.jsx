@@ -23,7 +23,6 @@ import {
     Loading
 } from 'carbon-components-react';
 
-
 import ResultTile from './ResultTile.jsx';
 import SearchStore from '../stores/SearchStore.js';
 import * as SearchActions from '../actions/SearchActions.js';
