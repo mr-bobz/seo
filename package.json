@@ -4,6 +4,8 @@
   "description": "SEO Sample Project",
   "main": "src/server/index.js",
   "scripts": {
+    "clean": "rimraf dist",
+    "prebuild": "npm run clean",
     "build:server": "babel src/server -d dist/server",
     "build:watch:server": "babel src/server -d dist/server --watch",
     "build:client": "webpack --config webpack.prod.config.js",
@@ -12,7 +14,7 @@
     "start": "npm run build && node dist/server/index.js",
     "start:dev": "parallelshell 'npm run build:watch:server' 'npm run build:watch:client && NODE_ENV=development' 'nodemon ./dist/server/index.js'",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "babel": "babel"
+    "lint": "jshint dist/**.js"
   },
   "keywords": [
     "seo"
@@ -43,9 +45,11 @@
     "style-loader": "^0.21.0",
     "url-loader": "^1.0.1",
     "webpack": "^4.8.3",
-    "webpack-cli": "^2.1.3"
+    "webpack-cli": "^2.1.3",
+    "rimraf": "^2.6.2"
   },
   "devDependencies": {
+    "jshint": "^2.9.5",
     "nodemon": "^1.17.4",
     "parallelshell": "^3.0.2"
   },
