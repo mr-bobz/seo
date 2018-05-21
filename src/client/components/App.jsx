@@ -25,7 +25,8 @@ import {
 
 
 import ResultTile from './ResultTile.jsx';
-import SearchAPI from '../SearchAPI.js';
+import SearchStore from '../stores/SearchStore.js';
+import * as SearchActions from '../actions/SearchActions.js';
 import appLogo from '../images/app-logo.png';
 //import googleLogo from '../images/google-logo.jpg';
 
@@ -52,6 +53,18 @@ class App extends React.Component {
         ];
 
         this.tabCount = 2;
+    }
+
+    componentWillMount(){
+        //listen to store event
+        SearchStore.on("Search_Complete", () =>{
+            console.debug("Search_Complete event triggered...");
+            this.setState({
+                trend: SearchStore.getTrends(),
+                results: SearchStore.getResults(),
+                loading: false
+            });
+        });
     }
 
     //2-way sync, controlled component
@@ -90,37 +103,10 @@ class App extends React.Component {
         if (document.getElementById('nodata'))
             document.getElementById('nodata').innerHTML = "Searching...";
 
-        SearchAPI.search(this.state.inputKeywords, this.state.inputURL)    
-            .then(resp => resp.json())
-                .then(data => {
-                    // code for handling the data from the API
-                    console.log("fetch succesful, data:", data);
-                    let trend = this.state.trend;
-                    let positions = "";
-                    if (data && data.length > 0) {
-                        for (let i = 0; i < data.length; i++) {
-                            if (i > 0) {
-                                positions += ", " + data[i].position;
-                            } else positions += data[i].position;
-                        }
-                    }
-                    trend.push({
-                        id: Date.now() + "", //rowId for table
-                        date: new Date().toLocaleString(),
-                        positions: positions,
-                        url: this.state.inputURL,
-                        keywords: this.state.inputKeywords
-                    })
-                    //console.debug("trend:",trend);
-                    this.setState({
-                        results: data,
-                        trend: trend,
-                        loading: false
-                    })
-                }).catch(function (err) {
-                    // if the server returns any errors
-                    console.error(err);
-                });
+        SearchActions.search({
+            keywords: this.state.inputKeywords,
+            url: this.state.inputURL
+        });            
     }
 
     generateTiles() {
@@ -162,7 +148,6 @@ class App extends React.Component {
                 </StructuredListBody>
             </StructuredListWrapper>
         );
-
     }
 
     render() {
@@ -208,6 +193,7 @@ class App extends React.Component {
                                     </Col>
                                     <Col xs="12" sm="8" md="8" lg="8" xl="8">
                                         <Search
+                                            labelText="URL Search"
                                             id="url"
                                             small
                                             className="search"
@@ -226,6 +212,7 @@ class App extends React.Component {
                                     </Col>
                                     <Col xs="12" sm="8" md="8" lg="8" xl="8">
                                         <Search
+                                            labelText="Keywords Search"
                                             id="keywords"
                                             small
                                             className="search"

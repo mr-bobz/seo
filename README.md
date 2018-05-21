@@ -3,6 +3,16 @@
 
 This is a basic isomorphic app, built with react, node/express, ES6, webpack etc.
 
+### Overview
+Analyse: 
+* Searches in Google for given keywords and url, then displays the rank(s) in search results
+
+Trends
+* View past searches to see trends in results (not persisted)
+
+Demo: https://soa.au-syd.mybluemix.net/
+
+
 ### install
 
 * `git clone https://github.com/mr-bobz/seo` - clone locally or download as zip from the site
