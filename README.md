@@ -12,6 +12,7 @@ Trends
 
 Demo: https://soa.au-syd.mybluemix.net/
 
+Above demo is setup on IBM Bluemix (cloud, PaaS) and continous deployment is enabled via a pipeline and webhook, whenever changes are pushed to this Git.
 
 ### install
 
